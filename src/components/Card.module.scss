@@ -1,0 +1,37 @@
+// .imgBackground {
+//   background-color: #87878740;
+//   box-sizing: border-box;
+// }
+.card {
+  width: 370px;
+  border-radius: 4px;
+  &:hover {
+    cursor: pointer;
+    & img {
+      z-index: -1;
+    }
+    & .imgBackground {
+      z-index: 2;
+    }
+  }
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+}
+.text {
+  & p {
+    margin: 0;
+  }
+}
+.title {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 23.12px;
+}
+.price {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 26px;
+}

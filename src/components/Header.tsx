@@ -1,9 +1,9 @@
 import styles from "./Header.module.scss";
-import cart from "../assets/cart.svg";
+import cart from "../assets/images/cart.svg";
 
 const Header = () => {
   return (
-    <section className={styles.header}>
+    <header className={styles.header}>
       <div className={styles.line + " container"}>
         <div className={styles.logo}>Goods4you</div>
         <ul>
@@ -26,7 +26,7 @@ const Header = () => {
           </li>
         </ul>
       </div>
-    </section>
+    </header>
   );
 };
 
