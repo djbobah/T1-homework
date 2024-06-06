@@ -8,7 +8,6 @@ interface IButtonAction {
 const ButtonAction = ({ img, onClick }: IButtonAction) => {
   return (
     <button className={styles.btn} onClick={onClick}>
-      {" "}
       <img src={img} alt="action button " />
     </button>
   );
