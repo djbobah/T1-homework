@@ -2,25 +2,14 @@
 //   background-color: #87878740;
 //   box-sizing: border-box;
 // }
-.card {
-  width: 370px;
-  border-radius: 4px;
-  &:hover {
-    cursor: pointer;
-    & img {
-      z-index: -1;
-    }
-    & .imgBackground {
-      z-index: 2;
-    }
-  }
-}
 
 .description {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .text {
+  margin-top: 5px;
   & p {
     margin: 0;
   }
@@ -34,4 +23,23 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 26px;
+}
+
+.card {
+  width: 370px;
+  border-radius: 4px;
+  & img {
+    -webkit-filter: brightness(100%);
+  }
+  &:hover {
+    cursor: pointer;
+    & > img {
+      -webkit-filter: brightness(85%);
+      transition: all 2s ease;
+    }
+    & .title {
+      text-decoration: underline;
+      // transition: text-decoration 3s ease;
+    }
+  }
 }

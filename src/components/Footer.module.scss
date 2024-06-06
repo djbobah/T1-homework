@@ -1,0 +1,42 @@
+.wrapper {
+  background-color: #444b58;
+  height: 80px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+}
+.logo {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 43.35px;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  & ul {
+    position: relative;
+    left: -11px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 33px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 20.23px;
+    & li:hover {
+    }
+  }
+  & a {
+    text-decoration: none;
+    color: inherit;
+    &:hover {
+      color: #c4c4c4;
+      text-decoration: underline;
+    }
+  }
+}

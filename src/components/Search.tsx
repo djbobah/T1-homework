@@ -1,11 +1,14 @@
 import styles from "./Search.module.scss";
 
 import Button from "./Button";
+interface ISerch {
+  styleName: string;
+}
 
-const Search = () => {
+const Search = ({ styleName }: ISerch) => {
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper + " " + styleName}>
         <div className="container">
           <input
             type="text"

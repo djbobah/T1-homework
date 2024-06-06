@@ -1,7 +1,7 @@
 import styles from "./Card.module.scss";
-import img from "../assets/images/image.png";
 import ButtonAction from "./ButtonAction";
 import cartImage from "../assets/images/cart.svg";
+import Counter from "./Counter";
 
 interface IGood {
   id: number;
@@ -12,17 +12,25 @@ interface IGood {
 }
 
 const Card = ({ id, image, count, title, price }: IGood) => {
+  const CorpTitle = (title: string, count: number) => {
+    if (count > 0 && title.length > 20) {
+      return title.slice(0, 20) + "...";
+    } else return title;
+  };
+
   return (
     <article className={styles.card}>
-      <div className={styles.imgBackground}>
-        <img src={image} alt={title + " image"} />
-      </div>
+      <img src={image} alt={title + " image"} />
       <div className={styles.description}>
         <div className={styles.text}>
-          <p className={styles.title}>{title}</p>
+          <p className={styles.title}>{CorpTitle(title, count)}</p>
           <p className={styles.price}>{price + " $"}</p>
         </div>
-        <ButtonAction img={cartImage} />
+        {count > 0 ? (
+          <Counter count={count} />
+        ) : (
+          <ButtonAction img={cartImage} />
+        )}
       </div>
     </article>
   );

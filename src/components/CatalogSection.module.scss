@@ -1,6 +1,28 @@
+.title {
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 43px;
+  color: #444b58;
+  margin-top: 54px;
+}
+.search {
+  margin-top: 43px;
+}
+
 .cardList {
   display: flex;
   flex-wrap: wrap;
   gap: 35px;
+  row-gap: 40px;
   margin-top: 40px;
+}
+
+.moreButton {
+  // position: relative;
+
+  display: flex;
+  justify-content: center;
+  margin-top: 59px;
+  position: relative;
+  right: 29px;
 }
