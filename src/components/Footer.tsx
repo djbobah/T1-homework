@@ -1,16 +1,21 @@
+import { Link } from "react-router-dom";
 import styles from "./Footer.module.scss";
 
 const Footer = () => {
   return (
     <footer className={styles.wrapper}>
       <div className={styles.footer + " container"}>
-        <span className={styles.logo}>Goods4you</span>
+        <span className={styles.logo}>
+          {" "}
+          <Link to="/">Goods4you </Link>
+        </span>
+
         <ul>
           <li>
-            <a href="">Catalog</a>
+            <a href="#catalog">Catalog</a>
           </li>
           <li>
-            <a href="">FAQ</a>
+            <a href="#faq">FAQ</a>
           </li>
         </ul>
       </div>

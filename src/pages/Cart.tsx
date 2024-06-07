@@ -1,5 +1,7 @@
+import CartSection from "../components/CartSection";
+
 const Cart = () => {
-  return <h2>Cart</h2>;
+  return <CartSection />;
 };
 
 export default Cart;

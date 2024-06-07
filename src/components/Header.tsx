@@ -1,20 +1,24 @@
 import styles from "./Header.module.scss";
 import cart from "../assets/images/cart.svg";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.line + " container"}>
-        <span className={styles.logo}>Goods4you</span>
+        <span className={styles.logo}>
+          <Link to="/">Goods4you</Link>
+        </span>
+
         <ul>
           <li>
-            <a href="">Catalog</a>
+            <a href="#catalog">Catalog</a>
           </li>
           <li>
-            <a href="">FAQ</a>
+            <a href="#faq">FAQ</a>
           </li>
           <li>
-            <a href="">
+            <Link to="/cart">
               <div className={styles.cartWrapper}>
                 <span>Cart</span>
                 <div className={styles.cart}>
@@ -22,7 +26,7 @@ const Header = () => {
                   <span className={styles.bage}>1</span>
                 </div>
               </div>
-            </a>
+            </Link>
           </li>
         </ul>
       </div>

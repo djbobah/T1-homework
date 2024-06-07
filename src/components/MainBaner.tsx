@@ -11,7 +11,9 @@ const MainBaner = () => {
           We sell smartphones, laptops, clothes, shoes and many other products
           at low prices
         </p>
-        <Button title="Go to shopping" styleName={styles.btn} />
+        <a href="#catalog">
+          <Button title="Go to shopping" styleName={styles.btn} />
+        </a>
         <div className={styles.backgroundText}>Goods4you</div>
       </div>
     </section>

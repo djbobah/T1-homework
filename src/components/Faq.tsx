@@ -1,5 +1,4 @@
 import styles from "./Faq.module.scss";
-import xImg from "../assets/images/+.svg";
 import Accordion from "./Accordeon";
 
 const faqs = [
@@ -17,7 +16,7 @@ const faqs = [
 
 const Faq = () => {
   return (
-    <section className={styles.wrapper}>
+    <section className={styles.wrapper} id="faq">
       <div className={styles.container}>
         <h2 className={styles.title}>FAQ</h2>
         {faqs.map((faq) => (
@@ -28,8 +27,8 @@ const Faq = () => {
           //       <img src={xImg} alt="action for accordion " />
           //     </button>
           // </div>
-          <Accordion key={faq.id} title={faq.question}>
-            <p>{faq.answer}</p>
+          <Accordion key={faq.id} title={faq.question} styleName={styles.row}>
+            <p className={styles.accordionContent}>{faq.answer}</p>
           </Accordion>
         ))}
       </div>

@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import styles from "./Accordeon.module.scss";
 
-const Accordion = ({ title, children }) => {
+interface IAccordion {
+  title: string;
+  children: ReactNode;
+  styleName?: string;
+}
+
+const Accordion = ({ title, children, styleName }: IAccordion) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div>
-      <button className={styles.accordion} onClick={() => setIsOpen(!isOpen)}>
+    <div className={styleName}>
+      <div
+        className={styles.accordion + ` ${isOpen ? styles.open : ""}`}
+        onClick={() => setIsOpen(!isOpen)}
+      >
         {title}
-      </button>
+      </div>
       <div className={styles.panel + ` ${isOpen ? styles.open : ""}`}>
         {children}
       </div>

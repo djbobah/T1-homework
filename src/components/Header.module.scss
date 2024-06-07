@@ -3,6 +3,7 @@
   color: #ffffff;
   // width: calc(100vw - 20px);
   // height: 90px;
+  min-width: 1181px;
   padding-top: 14px;
   padding-bottom: 30px;
   display: flex;
@@ -10,8 +11,8 @@
   & > div {
     display: flex;
     justify-content: space-between;
-    position: relative;
-    left: -8px;
+    // position: relative;
+    // left: -8px;
   }
   & ul {
     position: relative;
@@ -47,6 +48,10 @@
   line-height: 43.35px;
   &:hover {
     cursor: pointer;
+    & > a {
+      text-decoration: none;
+      color: inherit;
+    }
   }
 }
 .cartWrapper {
