@@ -5,9 +5,10 @@ import styles from "./Counter.module.scss";
 import ButtonCounter from "./ButtonCounter";
 interface ICounter {
   count: number;
+  stylesName?: string;
 }
 
-const Counter = ({ count }: ICounter) => {
+const Counter = ({ count, stylesName }: ICounter) => {
   const [counter, setCounter] = useState(count);
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     // if()
@@ -24,7 +25,7 @@ const Counter = ({ count }: ICounter) => {
     else setCounter(1);
   };
   return (
-    <div className={styles.counterWratter}>
+    <div className={styles.counterWratter + " " + stylesName}>
       <ButtonCounter
         img={minusImg}
         onClick={handleClickMinus}

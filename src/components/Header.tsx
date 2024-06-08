@@ -18,10 +18,10 @@ const Header = () => {
 
         <ul>
           <li>
-            <a href="#catalog">Catalog</a>
+            <Link to="/#catalog">Catalog</Link>
           </li>
           <li>
-            <a href="#faq">FAQ</a>
+            <Link to="/#faq">FAQ</Link>
           </li>
           <li>
             <Link to="/cart">
