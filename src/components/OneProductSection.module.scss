@@ -22,17 +22,16 @@
   gap: 20px;
 
   & > li {
-    width: 70px;
-    height: 75px;
     & img {
       width: 70px;
       height: 75px;
       box-sizing: border-box;
       border-radius: 4px;
+      &:hover {
+        cursor: pointer;
+      }
       &.active {
         border: 3px solid #c4c4c4;
-        width: 64px;
-        height: 69px;
       }
     }
   }
@@ -41,8 +40,6 @@
 .description {
   display: flex;
   flex-direction: column;
-  // justify-content: space-between;
-  // gap: 22px;
   margin-left: 43px;
   & > h1 {
     padding-top: 12px;
@@ -55,10 +52,8 @@
     list-style: none;
     font-weight: 600;
     font-size: 16px;
-    // line-height: 23px;
     margin: 0;
     padding: 0;
-    // margin-top: -40px;
     color: #b2b5bb;
     & li {
       margin-bottom: 28px;
@@ -82,6 +77,11 @@
         margin-left: 5px;
       }
     }
+  }
+}
+.rating {
+  & > img {
+    padding-right: 8px;
   }
 }
 .btn {

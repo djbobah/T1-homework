@@ -20,13 +20,6 @@ const Faq = () => {
       <div className={styles.container}>
         <h2 className={styles.title}>FAQ</h2>
         {faqs.map((faq) => (
-          // <div className={styles.row}>
-          //   <h3 className={styles.question}>question</h3>
-          //   <p className={styles.answer}>answer</p>
-          //   <button className={styles.btn}>
-          //       <img src={xImg} alt="action for accordion " />
-          //     </button>
-          // </div>
           <Accordion key={faq.id} title={faq.question} styleName={styles.row}>
             <p className={styles.accordionContent}>{faq.answer}</p>
           </Accordion>

@@ -1,10 +1,23 @@
 import styles from "./Header.module.scss";
 import cart from "../assets/images/cart.svg";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Header = () => {
   const location = useLocation();
-  console.log(location.pathname);
+
+  const navigate = useNavigate();
+
+  const goToAnchor = (path: string, anchor: string) => {
+    navigate(path);
+    if (anchor) {
+      setTimeout(() => {
+        const element = document.getElementById(anchor);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 0);
+    }
+  };
   return (
     <header className={styles.header}>
       <div
@@ -18,10 +31,14 @@ const Header = () => {
 
         <ul>
           <li>
-            <Link to="/#catalog">Catalog</Link>
+            <a onClick={() => goToAnchor("/", "#catalog")} href="#catalog">
+              Catalog
+            </a>
           </li>
           <li>
-            <Link to="/#faq">FAQ</Link>
+            <a onClick={() => goToAnchor("/", "#faq")} href="#faq">
+              FAQ
+            </a>
           </li>
           <li>
             <Link to="/cart">

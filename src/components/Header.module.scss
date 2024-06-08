@@ -1,8 +1,7 @@
 .header {
   background-color: #484283;
   color: #ffffff;
-  // width: calc(100vw - 20px);
-  // height: 90px;
+
   min-width: 1181px;
   padding-top: 14px;
   padding-bottom: 26px;
@@ -11,8 +10,6 @@
   & > div {
     display: flex;
     justify-content: space-between;
-    // position: relative;
-    // left: -8px;
   }
   & ul {
     position: relative;
@@ -42,9 +39,7 @@
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
-// .addPaddinng {
-//   padding-bottom: 35px;
-// }
+
 .logo {
   font-size: 30px;
   font-weight: 700;
@@ -59,17 +54,13 @@
 }
 .cartWrapper {
   display: flex;
-  // align-items: center;
-  // gap: 6px;
-  // padding-left: 10px;
 }
 .cart {
   display: flex;
   align-items: center;
   gap: 6px;
   margin-top: -5px;
-  // position: relative;
-  // margin-right: 6px;
+
   position: relative;
   left: 6px;
 }

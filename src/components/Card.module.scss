@@ -1,8 +1,3 @@
-// .imgBackground {
-//   background-color: #87878740;
-//   box-sizing: border-box;
-// }
-
 .description {
   display: flex;
   justify-content: space-between;
@@ -40,7 +35,6 @@
     }
     & .title {
       text-decoration: underline;
-      // transition: text-decoration 3s ease;
     }
   }
 }

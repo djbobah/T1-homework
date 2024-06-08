@@ -3,7 +3,6 @@ import styles from "./CatalogSection.module.scss";
 
 import Search from "./Search";
 import goods from "../mock/goods.json";
-// import ButtonAction from "./ButtonAction";
 import Button from "./Button";
 
 const CatalogSection = () => {

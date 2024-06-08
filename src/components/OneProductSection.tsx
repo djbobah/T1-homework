@@ -3,6 +3,7 @@ import styles from "./OneProductSection.module.scss";
 import mainImg from "../assets/images/productXL.jpg";
 import secondaryImg from "../assets/images/productSM.jpg";
 import Button from "./Button";
+import starImg from "../assets/images/Star 1.svg";
 
 const OneProductSection = () => {
   const { id } = useParams();
@@ -22,7 +23,7 @@ const OneProductSection = () => {
           <ul className={styles.secondaryImgs}>
             <li>
               <img
-                // className={styles.active}
+                className={styles.active}
                 src={secondaryImg}
                 alt="дополнительная картинка"
               />
@@ -43,18 +44,19 @@ const OneProductSection = () => {
               <img src={secondaryImg} alt="дополнительная картинка" />
             </li>
           </ul>
-
-          {/* <img src={secondaryImg} alt="дополнительная картинка" />
-            <img src={secondaryImg} alt="дополнительная картинка" />
-            <img src={secondaryImg} alt="дополнительная картинка" />
-            <img src={secondaryImg} alt="дополнительная картинка" />
-            <img src={secondaryImg} alt="дополнительная картинка" /> */}
         </section>
         <section className={styles.description}>
           <h1>Puma Force 1 Shadow</h1>
           <ul>
             <li>
-              Rating<span>dddd</span>
+              Rating
+              <span className={styles.rating}>
+                <img src={starImg} alt="картинка звезды" />
+                <img src={starImg} alt="картинка звезды" />
+                <img src={starImg} alt="картинка звезды" />
+                <img src={starImg} alt="картинка звезды" />
+                <img src={starImg} alt="картинка звезды" />
+              </span>
             </li>
             <li>
               Base price<span>500$</span>

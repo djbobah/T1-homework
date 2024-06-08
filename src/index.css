@@ -11,7 +11,7 @@
 }
 
 .notFound {
-  height: calc(100vh - 173px);
+  height: calc(100vh - 163px);
   /* height: 100vh; */
   display: flex;
   flex-direction: column;

@@ -11,13 +11,7 @@ interface ICounter {
 const Counter = ({ count, stylesName }: ICounter) => {
   const [counter, setCounter] = useState(count);
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    // if()
-
     setCounter(() => Number(target.value));
-    console.log(counter);
-    // const handleClickMinus = () => {
-    //   // setCounter((prev) => prev + 1);
-    //   console.log(counter);
   };
 
   const handleClickMinus = () => {
