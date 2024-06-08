@@ -15,7 +15,7 @@ function App() {
         <Route path="/product/:id" element={<OneProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Home />} />
-        <Route path="/*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>

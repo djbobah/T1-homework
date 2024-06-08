@@ -1,0 +1,55 @@
+.wrapper {
+  display: flex;
+  gap: 53px;
+  justify-content: space-between;
+  height: calc(100vh - 252px);
+}
+
+.cart {
+  padding: 30px 47px;
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  width: 780px;
+  height: max-content;
+}
+.cash {
+  text-align: right;
+  height: max-content;
+  & > p {
+    margin: 0;
+  }
+}
+
+.count {
+  padding-top: 30px;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 28.9px;
+  color: #b2b5bb;
+  & > span {
+    color: #444b58;
+  }
+}
+.price {
+  padding-top: 42px;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28.9px;
+
+  color: #b2b5bb;
+  & > span {
+    color: #444b58;
+    font-weight: 700;
+  }
+}
+.total {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 34.68px;
+
+  color: #b2b5bb;
+  & > span {
+    color: #444b58;
+    font-weight: 700;
+  }
+}

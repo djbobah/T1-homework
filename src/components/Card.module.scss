@@ -35,6 +35,7 @@
     cursor: pointer;
     & > img {
       -webkit-filter: brightness(85%);
+      will-change: transition;
       transition: all 2s ease;
     }
     & .title {

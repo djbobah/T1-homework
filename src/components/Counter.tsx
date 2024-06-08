@@ -25,11 +25,16 @@ const Counter = ({ count }: ICounter) => {
   };
   return (
     <div className={styles.counterWratter}>
-      <ButtonCounter img={minusImg} onClick={handleClickMinus} />
+      <ButtonCounter
+        img={minusImg}
+        onClick={handleClickMinus}
+        type="decrement counter"
+      />
       <input type="text" value={counter} onChange={handleChange} />
       <ButtonCounter
         img={plusImg}
         onClick={() => setCounter((prev) => prev + 1)}
+        type="increment counter"
       />
     </div>
   );
