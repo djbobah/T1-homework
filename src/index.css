@@ -4,10 +4,15 @@
   font-weight: 400;
   box-sizing: border-box;
 }
+html,
+body {
+  overflow-x: hidden;
+}
 
 .container {
   width: 1181px;
   margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .notFound {
@@ -19,5 +24,22 @@
   justify-content: center;
   & img {
     width: 600px;
+  }
+}
+
+@media (max-width: 1180px) {
+  .container {
+    box-sizing: border-box;
+    width: 100%;
+  }
+}
+@media (max-width: 520px) {
+  .container {
+    width: 90vw;
+  }
+  .notFound {
+    & > img {
+      width: 300px;
+    }
   }
 }

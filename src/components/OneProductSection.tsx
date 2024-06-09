@@ -8,12 +8,7 @@ import starImg from "../assets/images/Star 1.svg";
 const OneProductSection = () => {
   const { id } = useParams();
   return (
-    <section
-      className="container"
-      style={{
-        height: "calc(100vh - 288px)",
-      }}
-    >
+    <section className={styles.container + " container"}>
       <h2 className={styles.title}>{`Product ${id}`}</h2>
       <div className={styles.wraper}>
         <section className={styles.imagesList}>

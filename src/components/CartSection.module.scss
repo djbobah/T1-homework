@@ -70,3 +70,163 @@
     margin-left: 3px;
   }
 }
+
+@media (max-width: 1180px) {
+  .wrapper {
+    margin-left: 10px;
+    height: 100vh;
+    margin-bottom: 80px;
+  }
+  .title {
+    margin-left: 10px;
+  }
+  .cart {
+    padding: 20px;
+  }
+  .cash {
+    margin-right: 10px;
+  }
+  .count {
+    padding-top: 20px;
+  }
+  .price {
+    padding-top: 32px;
+    padding-right: 5px;
+
+    & > span:nth-child(2) {
+      display: block;
+    }
+  }
+  .total {
+    & > span:nth-child(2) {
+      display: block;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .wrapper {
+    margin-left: 10px;
+  }
+  .title {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 35px;
+  }
+  .cart {
+    padding: 20px;
+  }
+  .cash {
+    margin-right: 10px;
+  }
+  .count {
+    padding-top: 20px;
+    font-size: 16px;
+  }
+  .price {
+    padding-top: 32px;
+    padding-right: 5px;
+    font-size: 18px;
+    line-height: 20px;
+    & > span:nth-child(2) {
+      display: block;
+      font-size: 16px;
+    }
+  }
+  .total {
+    font-size: 16px;
+    line-height: 20px;
+    & > span:nth-child(2) {
+      display: block;
+      font-size: 16px;
+    }
+  }
+}
+@media (max-width: 680px) {
+  .wrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: block;
+  }
+  .title {
+    margin-left: 10px;
+  }
+  .cart {
+    padding: 15px;
+
+    width: 95vw;
+    height: max-content;
+    box-sizing: border-box;
+  }
+  .cash {
+    margin-right: 10px;
+  }
+  .count {
+    padding-top: 20px;
+    font-size: 16px;
+  }
+  .price {
+    padding-top: 32px;
+    padding-right: 5px;
+    font-size: 18px;
+    line-height: 20px;
+    & > span:nth-child(2) {
+      display: block;
+      font-size: 16px;
+    }
+  }
+  .total {
+    font-size: 16px;
+    line-height: 20px;
+    & > span:nth-child(2) {
+      display: block;
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 530px) {
+  .wrapper {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 30px;
+    display: block;
+  }
+  .title {
+    margin-left: 10px;
+  }
+  .cart {
+    padding: 15px;
+    margin: 0 auto;
+    width: 85vw;
+    height: max-content;
+    box-sizing: border-box;
+  }
+  .cash {
+    margin-right: 10px;
+  }
+  .count {
+    padding-top: 20px;
+    font-size: 16px;
+  }
+  .price {
+    padding-top: 32px;
+    padding-right: 5px;
+    font-size: 18px;
+    line-height: 20px;
+    & > span:nth-child(2) {
+      display: block;
+      font-size: 16px;
+    }
+  }
+  .total {
+    font-size: 16px;
+    line-height: 20px;
+    & > span:nth-child(2) {
+      display: block;
+      font-size: 16px;
+    }
+  }
+}

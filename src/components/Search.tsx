@@ -15,7 +15,7 @@ const Search = ({ styleName }: ISerch) => {
             placeholder="Search by title"
             className={styles.input}
           />
-          <Button title="Search" />
+          <Button title="Search" styleName={styles.cropButton} />
         </div>
       </div>
     </>

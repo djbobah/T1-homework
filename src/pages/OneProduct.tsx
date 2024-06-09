@@ -12,7 +12,6 @@ const OneProduct = () => {
 
   const product = findProductById(Number(id));
 
-  console.log(product);
   useEffect(() => {
     if (!product) {
       navigate("/notfound");

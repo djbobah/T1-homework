@@ -19,7 +19,7 @@ const Counter = ({ count, stylesName }: ICounter) => {
     else setCounter(1);
   };
   return (
-    <div className={styles.counterWratter + " " + stylesName}>
+    <div className={styles.counterWrapper + " " + stylesName}>
       <ButtonCounter
         img={minusImg}
         onClick={handleClickMinus}

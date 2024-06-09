@@ -4,12 +4,17 @@
   line-height: 43px;
   color: #444b58;
   margin-top: 54px;
+  padding-left: 8px;
 }
 .search {
   margin-top: 43px;
+  padding-left: 8px;
 }
 
 .cardList {
+  padding-left: 7px;
+  width: 1187px;
+  box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   gap: 35px;
@@ -22,4 +27,45 @@
   justify-content: center;
   margin-top: 59px;
   position: relative;
+  margin-left: 14px;
+}
+
+@media (max-width: 1180px) {
+  .header {
+    width: calc(100vw - 100px);
+
+    padding-top: 14px;
+    padding-bottom: 26px;
+  }
+  .title {
+    margin-left: 10px;
+  }
+  .cardList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100vw;
+    box-sizing: border-box;
+    gap: 35px;
+    row-gap: 39px;
+    margin-top: 40px;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .cardList {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 90vw;
+    box-sizing: border-box;
+    gap: 35px;
+    margin-top: 40px;
+    padding-left: 0;
+  }
 }

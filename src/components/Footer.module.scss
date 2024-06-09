@@ -5,6 +5,8 @@
   display: flex;
   align-items: center;
   min-width: 1181px;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
 .footer {
@@ -43,5 +45,39 @@
       text-decoration: none;
       color: inherit;
     }
+  }
+}
+@media (max-width: 1180px) {
+  .wrapper {
+    min-width: 100vw;
+    margin: 0 auto;
+    padding-top: 14px;
+    padding-bottom: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+@media (max-width: 321px) {
+  .footer {
+    min-width: 90vw;
+    padding-top: 14px;
+    padding-bottom: 26px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    & ul {
+      display: flex;
+      align-items: center;
+      list-style: none;
+      gap: 10px;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 16px;
+      & li:hover {
+      }
+    }
+  }
+  .logo {
+    font-size: 24px;
   }
 }

@@ -38,3 +38,11 @@
     }
   }
 }
+@media (max-width: 480px) {
+  .card {
+    width: 300px;
+    & img {
+      width: 300px;
+    }
+  }
+}
