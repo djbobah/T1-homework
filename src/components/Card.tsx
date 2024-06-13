@@ -13,7 +13,7 @@ import { IProduct } from "../types/ProductTypes";
 //   price: number;
 // }
 
-const Card = ({ id, images, title, price }: IProduct) => {
+const Card = ({ id, thumbnail, title, price }: IProduct) => {
   const navigate = useNavigate();
 
   const count = 0;
@@ -29,21 +29,23 @@ const Card = ({ id, images, title, price }: IProduct) => {
 
   return (
     <article className={styles.card}>
-      <img
-        src={images[0]}
-        alt={title + " image"}
-        onClick={() => handleClickCard(id)}
-      />
+      <div className={styles.imageWrapper}>
+        <img
+          src={thumbnail}
+          alt={title + " image"}
+          onClick={() => handleClickCard(id)}
+        />
+      </div>
       <div className={styles.description}>
         <div className={styles.text} onClick={() => handleClickCard(id)}>
           <p className={styles.title}>{CorpTitle(title, count)}</p>
           <p className={styles.price}>{price + " $"}</p>
         </div>
-        {/* {count > 0 ? (
+        {count > 0 ? (
           <Counter count={count} />
-        ) : ( */}
-        <ButtonAction img={cartImage} type="add to cart" />
-        {/* )} */}
+        ) : (
+          <ButtonAction img={cartImage} type="add to cart" />
+        )}
       </div>
     </article>
   );

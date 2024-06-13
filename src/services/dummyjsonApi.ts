@@ -1,6 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IProduct, ISearch } from "../types/ProductTypes";
 
+interface IProductQuery {
+  query: string;
+  limit: number;
+  skip: number;
+}
+
 // Define a service using a base URL and expected endpoints
 export const dummyjsonApi = createApi({
   reducerPath: "dummyjsonApi",
@@ -11,10 +17,7 @@ export const dummyjsonApi = createApi({
     getUserCart: builder.query<ISearch, number>({
       query: (id: number) => `carts/user/${id}`,
     }),
-    getProducts: builder.query<
-      IProduct[],
-      { query: string; limit: number; skip: number }
-    >({
+    getProducts: builder.query<IProduct[], IProductQuery>({
       query: ({ query, limit, skip }) => ({
         url: `products/search?q=${query}&limit=${limit}&skip=${skip}`,
       }),
