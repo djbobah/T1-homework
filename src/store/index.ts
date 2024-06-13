@@ -1,11 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { dummyjsonApi } from "../services/dummyjsonApi";
 
 // import Words from "./Words.ts";
 
 const store = configureStore({
   reducer: {
+    [dummyjsonApi.reducerPath]: dummyjsonApi.reducer,
     // words: Words,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(dummyjsonApi.middleware),
 });
 
 export default store;

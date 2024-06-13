@@ -3,17 +3,20 @@ import ButtonAction from "./ButtonAction";
 import cartImage from "../assets/images/cart.svg";
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
+import { IProduct } from "../types/ProductTypes";
 
-interface IGood {
-  id: number;
-  image: string;
-  count: number;
-  title: string;
-  price: number;
-}
+// interface IGood {
+//   id: number;
+//   image: string;
+//   count: number;
+//   title: string;
+//   price: number;
+// }
 
-const Card = ({ id, image, count, title, price }: IGood) => {
+const Card = ({ id, images, title, price }: IProduct) => {
   const navigate = useNavigate();
+
+  const count = 0;
 
   const CorpTitle = (title: string, count: number) => {
     if (count > 0 && title.length > 20) {
@@ -27,7 +30,7 @@ const Card = ({ id, image, count, title, price }: IGood) => {
   return (
     <article className={styles.card}>
       <img
-        src={image}
+        src={images[0]}
         alt={title + " image"}
         onClick={() => handleClickCard(id)}
       />
@@ -36,11 +39,11 @@ const Card = ({ id, image, count, title, price }: IGood) => {
           <p className={styles.title}>{CorpTitle(title, count)}</p>
           <p className={styles.price}>{price + " $"}</p>
         </div>
-        {count > 0 ? (
+        {/* {count > 0 ? (
           <Counter count={count} />
-        ) : (
-          <ButtonAction img={cartImage} type="add to cart" />
-        )}
+        ) : ( */}
+        <ButtonAction img={cartImage} type="add to cart" />
+        {/* )} */}
       </div>
     </article>
   );
