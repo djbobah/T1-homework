@@ -1,4 +1,5 @@
 export interface ISearch {
+  // push(arg0: any): unknown;
   products: IProduct[];
   total: number;
   skip: number;

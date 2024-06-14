@@ -18,11 +18,22 @@ export const dummyjsonApi = createApi({
       query: (id: number) => `carts/user/${id}`,
     }),
     getProducts: builder.query<IProduct[], IProductQuery>({
+      // query: ({ query, limit, skip }) =>
+      //   `products/search?q=${query}&limit=${limit}&skip=${skip}`,
       query: ({ query, limit, skip }) => ({
         url: `products/search?q=${query}&limit=${limit}&skip=${skip}`,
       }),
       transformResponse: (response: { products: IProduct[] }) =>
         response.products,
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        currentCache.push(...newItems);
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
     }),
   }),
 });

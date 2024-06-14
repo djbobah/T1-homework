@@ -3,9 +3,11 @@ import styles from "./Search.module.scss";
 import Button from "./Button";
 interface ISerch {
   styleName: string;
+  onChange: React.ChangeEventHandler<HTMLInputElement>;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Search = ({ styleName }: ISerch) => {
+const Search = ({ styleName, onChange, onClick }: ISerch) => {
   return (
     <>
       <div className={styles.wrapper + " " + styleName}>
@@ -14,8 +16,13 @@ const Search = ({ styleName }: ISerch) => {
             type="text"
             placeholder="Search by title"
             className={styles.input}
+            onChange={onChange}
           />
-          <Button title="Search" styleName={styles.cropButton} />
+          <Button
+            title="Search"
+            styleName={styles.cropButton}
+            onClick={onClick}
+          />
         </div>
       </div>
     </>

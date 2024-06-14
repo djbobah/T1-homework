@@ -6,10 +6,6 @@ import Cart from "./pages/Cart";
 import OneProduct from "./pages/OneProduct";
 import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
-import {
-  useGetProductsQuery,
-  useGetUserCartQuery,
-} from "./services/dummyjsonApi";
 
 function App() {
   //получаем корзину пользователя с id 11
