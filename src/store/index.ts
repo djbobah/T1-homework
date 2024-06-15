@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { dummyjsonApi } from "../services/dummyjsonApi";
+import cartSlice from "./cartSlice";
 
 // import Words from "./Words.ts";
 
 const store = configureStore({
   reducer: {
     [dummyjsonApi.reducerPath]: dummyjsonApi.reducer,
+    cart: cartSlice.reducer,
     // words: Words,
   },
   middleware: (getDefaultMiddleware) =>

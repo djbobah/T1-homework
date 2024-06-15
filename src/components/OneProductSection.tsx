@@ -1,85 +1,82 @@
-import { useParams } from "react-router-dom";
 import styles from "./OneProductSection.module.scss";
-import mainImg from "../assets/images/productXL.jpg";
-import secondaryImg from "../assets/images/productSM.jpg";
+
 import Button from "./Button";
 import starImg from "../assets/images/Star 1.svg";
+import { IProduct } from "../types/ProductTypes";
+import { useState } from "react";
+import { makeArrFromRange } from "../utils/functions";
+interface IOneProductSection {
+  data: IProduct;
+}
+const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
+  const [currentMainImage, setCurrentMainImage] = useState(data.images[0]);
 
-const OneProductSection = () => {
-  const { id } = useParams();
+  const arrRating = makeArrFromRange(1, Math.round(data.rating));
   return (
     <section className={styles.container + " container"}>
-      <h2 className={styles.title}>{`Product ${id}`}</h2>
+      <h2 className={styles.title}>{`Product ${data.id}`}</h2>
       <div className={styles.wraper}>
         <section className={styles.imagesList}>
           <div className={styles.mainImg}>
-            <img src={mainImg} alt="главная картинка" />
+            <img src={currentMainImage} alt="главная картинка" />
           </div>
           <ul className={styles.secondaryImgs}>
-            <li>
-              <img
-                className={styles.active}
-                src={secondaryImg}
-                alt="дополнительная картинка"
-              />
-            </li>
-            <li>
-              <img src={secondaryImg} alt="дополнительная картинка" />
-            </li>
-            <li>
-              <img src={secondaryImg} alt="дополнительная картинка" />
-            </li>
-            <li>
-              <img src={secondaryImg} alt="дополнительная картинка" />
-            </li>
-            <li>
-              <img src={secondaryImg} alt="дополнительная картинка" />
-            </li>
-            <li>
-              <img src={secondaryImg} alt="дополнительная картинка" />
-            </li>
+            {data.images.map((image: string) => (
+              <li
+                className={currentMainImage === image ? styles.active : ""}
+                key={image}
+                onClick={() => setCurrentMainImage(image)}
+              >
+                <img src={image} alt="дополнительная картинка" />
+              </li>
+            ))}
           </ul>
         </section>
         <section className={styles.description}>
-          <h1>Puma Force 1 Shadow</h1>
+          <h1>{data.title}</h1>
           <ul>
             <li>
               Rating
               <span className={styles.rating}>
-                <img src={starImg} alt="картинка звезды" />
-                <img src={starImg} alt="картинка звезды" />
-                <img src={starImg} alt="картинка звезды" />
-                <img src={starImg} alt="картинка звезды" />
-                <img src={starImg} alt="картинка звезды" />
+                {arrRating.map((item) => (
+                  <img key={item} src={starImg} alt="картинка звезды" />
+                ))}
               </span>
             </li>
             <li>
-              Base price<span>500$</span>
+              Base price<span>{data.price}$</span>
             </li>
             <li>
-              Discount percentage<span>10%</span>
+              Discount percentage<span>{data.discountPercentage}%</span>
             </li>
             <li className={styles.price}>
-              Discount price<span>450$</span>
+              Discount price
+              <span>
+                {(
+                  data.price -
+                  (data.price * data.discountPercentage) / 100
+                ).toFixed(2)}
+                $
+              </span>
             </li>
             <li className={styles.stock}>
-              Stock<span>13</span>
+              Stock<span>{data.stock}</span>
             </li>
             <li className={styles.brand}>
-              Brand<span>Puma</span>
+              Brand<span>{data.brand}</span>
             </li>
             <li>
-              Category<span>Smartphones</span>
+              Category<span>{data.category}</span>
             </li>
             <li className={styles.desc}>
               Description
-              <span> An apple mobile which is nothing like apple</span>
+              <span> {data.description}</span>
             </li>
           </ul>
           <Button title="Add to cart" styleName={styles.btn} />
         </section>
         <section className={styles.subInfo}>
-          SKU ID<span>0005</span>
+          SKU ID<span> {data.sku}</span>
         </section>
       </div>
     </section>

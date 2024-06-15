@@ -2,21 +2,19 @@ import Card from "./Card";
 import styles from "./CatalogSection.module.scss";
 
 import Search from "./Search";
-import goods from "../mock/goods.json";
 import Button from "./Button";
 import { useGetProductsQuery } from "../services/dummyjsonApi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { debounce } from "lodash";
 
 const CatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [queryST, setQuery] = useState({
-    query: searchQuery,
+    query: "",
     limit: 9,
     skip: 0,
   });
 
-  // useEffect(()=>{},query)
   const { data, error, isLoading } = useGetProductsQuery(queryST);
 
   const handleClickShow = () => {
@@ -24,16 +22,16 @@ const CatalogSection = () => {
   };
 
   function handleSearchClick() {
-    console.log("sdfdsfsd");
+    onSearch(searchQuery);
   }
 
-  const handleSearchChange = ({ target }) => {
-    debouncedSearch(target.value);
-    // console.log(target.value);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSearch(e.target.value);
+    setSearchQuery(e.target.value);
   };
 
   function onSearch(query: string) {
-    setSearchQuery((prev) => (prev = query));
+    setQuery((prev) => ({ ...prev, query: query, limit: 9, skip: 0 }));
   }
 
   // Создаем "debounced" версию функции с задержкой в 500 мс

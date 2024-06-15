@@ -6,6 +6,10 @@ export interface ISearch {
   limit: number;
 }
 
+export interface IQuery {
+  data: IProduct;
+}
+
 export interface IProduct {
   id: number;
   title: string;

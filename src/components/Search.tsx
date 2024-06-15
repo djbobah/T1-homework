@@ -1,13 +1,13 @@
 import styles from "./Search.module.scss";
 
 import Button from "./Button";
-interface ISerch {
+interface ISearch {
   styleName: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Search = ({ styleName, onChange, onClick }: ISerch) => {
+const Search = ({ styleName, onChange, onClick }: ISearch) => {
   return (
     <>
       <div className={styles.wrapper + " " + styleName}>

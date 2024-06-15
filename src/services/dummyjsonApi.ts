@@ -25,19 +25,33 @@ export const dummyjsonApi = createApi({
       }),
       transformResponse: (response: { products: IProduct[] }) =>
         response.products,
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+
+      serializeQueryArgs: ({ queryArgs }) => {
+        const { query } = queryArgs;
+        return query;
       },
       merge: (currentCache, newItems) => {
-        currentCache.push(...newItems);
+        const combinedArray = [...currentCache]; // Создаем копию первого массива
+        newItems.map((item) => {
+          if (!combinedArray.some((arrayItem) => arrayItem.id === item.id)) {
+            combinedArray.push(item); // Добавляем элемент из второго массива, если он не найден в первом
+          }
+        });
+        currentCache = combinedArray;
+        return currentCache;
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+      keepUnusedDataFor: 60,
+    }),
+    getProduct: builder.query<IProduct, number>({
+      query: (id: number) => `product/${id}`,
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserCartQuery, useGetProductsQuery } = dummyjsonApi;
+export const { useGetUserCartQuery, useGetProductsQuery, useGetProductQuery } =
+  dummyjsonApi;
