@@ -1,7 +1,7 @@
 import type { Preview } from "@storybook/react";
 
 const preview: Preview = {
-  tags: ["autodocs"],
+  tags: ["autodocs", "autodocs"],
   parameters: {
     controls: {
       matchers: {

@@ -35,6 +35,27 @@ export interface IProduct {
   thumbnail: string;
 }
 
+export interface IUserCart {
+  discountedTotal: number;
+  id: number;
+  products: ICartProduct[];
+  total: number;
+  totalProducts: number;
+  totalQuantity: number;
+  userId: number;
+}
+
+export interface ICartProduct {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  total: number;
+  discountPercentage: number;
+  discountedTotal: number;
+  thumbnail: string;
+}
+
 export interface IMetaProduct {
   createdAt: string;
   updatedAt: string;

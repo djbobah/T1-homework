@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { IProduct, ISearch } from "../types/ProductTypes";
+import { IProduct, IUserCart } from "../types/ProductTypes";
 
 interface IProductQuery {
   query: string;
@@ -14,8 +14,10 @@ export const dummyjsonApi = createApi({
     baseUrl: "https://dummyjson.com/",
   }),
   endpoints: (builder) => ({
-    getUserCart: builder.query<ISearch, number>({
+    getUserCart: builder.query<IUserCart, number>({
       query: (id: number) => `carts/user/${id}`,
+      transformResponse: (response: { carts: IUserCart[] }) =>
+        response.carts[0],
     }),
     getProducts: builder.query<IProduct[], IProductQuery>({
       // query: ({ query, limit, skip }) =>

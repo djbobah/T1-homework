@@ -11,11 +11,11 @@ const OneProduct = () => {
   const navigate = useNavigate();
 
   const { data, isLoading, isError } = useGetProductQuery(Number(id));
-  console.log(data);
   if (isLoading) return isLoading && <p>Идет загрузка данных...</p>;
   if (isError) navigate("/notfound");
 
   return <OneProductSection data={data!} />;
+  // return <Error />;
 };
 
 export default OneProduct;

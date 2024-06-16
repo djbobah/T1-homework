@@ -6,6 +6,8 @@ import Button from "./Button";
 import { useGetProductsQuery } from "../services/dummyjsonApi";
 import { useState } from "react";
 import { debounce } from "lodash";
+import Loader from "../utils/Loader";
+import Error from "./Error/Error";
 
 const CatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -37,13 +39,21 @@ const CatalogSection = () => {
   // Создаем "debounced" версию функции с задержкой в 500 мс
   const debouncedSearch = debounce(onSearch, 1000);
 
-  console.log(data);
-  console.log(error);
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+        <p>LOADING...</p>
+      </>
+    );
+  }
+  if (error) {
+    return <Error />;
+  }
+
   return (
     <>
       <section className="container" id="catalog">
-        {isLoading && <p>Идет загрузка данных...</p>}
-        {error && <p>Что то пошло не так</p>}
         {data && (
           <>
             <h2 className={styles.title}>Catalog</h2>

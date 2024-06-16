@@ -4,6 +4,8 @@ import cartImage from "../assets/images/cart.svg";
 import Counter from "./Counter";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../types/ProductTypes";
+import { useEffect, useState } from "react";
+import { useAppSelector } from "../hooks";
 
 // interface IGood {
 //   id: number;
@@ -14,9 +16,16 @@ import { IProduct } from "../types/ProductTypes";
 // }
 
 const Card = ({ id, thumbnail, title, price }: IProduct) => {
-  const navigate = useNavigate();
+  const [count, setCount] = useState(0);
 
-  const count = 0;
+  const cartProducts = useAppSelector((state) => state.cart.cart.products);
+  useEffect(() => {
+    cartProducts.map((product): void => {
+      if (product.id === id) setCount(product.quantity);
+    });
+  }, [cartProducts]);
+
+  const navigate = useNavigate();
 
   const CorpTitle = (title: string, count: number) => {
     if (count > 0 && title.length > 20) {
