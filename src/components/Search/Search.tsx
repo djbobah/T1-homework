@@ -1,6 +1,6 @@
 import styles from "./Search.module.scss";
 
-import Button from "./Button";
+import Button from "../Button/Button";
 interface ISearch {
   styleName: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;

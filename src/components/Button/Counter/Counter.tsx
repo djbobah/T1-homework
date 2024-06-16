@@ -1,8 +1,8 @@
-import plusImg from "../assets/images/plus.svg";
-import minusImg from "../assets/images/minus.svg";
+import plusImg from "../../../assets/images/plus.svg";
+import minusImg from "../../../assets/images/minus.svg";
 import { useState } from "react";
 import styles from "./Counter.module.scss";
-import ButtonCounter from "./ButtonCounter";
+import ButtonCounter from "../../ButtonCounter";
 interface ICounter {
   count: number;
   stylesName?: string;

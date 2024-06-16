@@ -1,6 +1,6 @@
 import styles from "./OneProductSection.module.scss";
 
-import Button from "./Button";
+import Button from "./Button/Button";
 import starImg from "../assets/images/Star 1.svg";
 import { IProduct } from "../types/ProductTypes";
 import { useState } from "react";

@@ -1,5 +1,5 @@
 import styles from "./CartItem.module.scss";
-import Counter from "./Counter";
+import Counter from "./Button/Counter/Counter";
 import { useNavigate } from "react-router-dom";
 import { ICartProduct } from "../types/ProductTypes";
 // import Loader from "../utils/Loader";

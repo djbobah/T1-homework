@@ -1,8 +1,8 @@
 import Card from "./Card";
 import styles from "./CatalogSection.module.scss";
 
-import Search from "./Search";
-import Button from "./Button";
+import Search from "./Search/Search";
+import Button from "./Button/Button";
 import { useGetProductsQuery } from "../services/dummyjsonApi";
 import { useState } from "react";
 import { debounce } from "lodash";
