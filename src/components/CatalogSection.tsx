@@ -45,7 +45,7 @@ const CatalogSection = () => {
     return (
       <>
         <Loader />
-        <p>LOADING...</p>
+        <p className="container">LOADING...</p>
       </>
     );
   }

@@ -11,7 +11,7 @@ const OneProduct = () => {
   const navigate = useNavigate();
 
   const { data, isLoading, isError } = useGetProductQuery(Number(id));
-  if (isLoading) return isLoading && <p>Идет загрузка данных...</p>;
+  if (isLoading) return <p className="container">Идет загрузка данных...</p>;
   if (isError) navigate("/notfound");
 
   return <OneProductSection data={data!} />;
