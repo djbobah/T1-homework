@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
 
-import Counter from "../Counter/Counter";
+import Search from "./Search";
 
-const meta: Meta<typeof Counter> = {
-  title: "Molecules/Counter",
-  component: Counter,
+const meta: Meta<typeof Search> = {
+  title: "Molecules/Search",
+  component: Search,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: "centered",
@@ -15,11 +15,10 @@ const meta: Meta<typeof Counter> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Counter>;
+type Story = StoryObj<typeof Search>;
 
 export const Primary: Story = {
   args: {
-    count: 1,
     // primary: true,
     // title: "Button",
     // placeholder:"asdasd"

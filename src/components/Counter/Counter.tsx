@@ -1,8 +1,9 @@
-import plusImg from "../../../assets/images/plus.svg";
-import minusImg from "../../../assets/images/minus.svg";
+import plusImg from "../../assets/images/plus.svg";
+import minusImg from "../../assets/images/minus.svg";
 import { useState } from "react";
 import styles from "./Counter.module.scss";
-import ButtonCounter from "../../ButtonCounter";
+// import ButtonCounter from "../../ButtonCounter";
+import ButtonAction from "../ButtonAction/ButtonAction";
 interface ICounter {
   count: number;
   stylesName?: string;
@@ -20,13 +21,13 @@ const Counter = ({ count, stylesName }: ICounter) => {
   };
   return (
     <div className={styles.counterWrapper + " " + stylesName}>
-      <ButtonCounter
+      <ButtonAction
         img={minusImg}
         onClick={handleClickMinus}
         type="decrement counter"
       />
       <input type="text" value={counter} onChange={handleChange} />
-      <ButtonCounter
+      <ButtonAction
         img={plusImg}
         onClick={() => setCounter((prev) => prev + 1)}
         type="increment counter"

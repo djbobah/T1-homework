@@ -1,7 +1,7 @@
 import styles from "./Card.module.scss";
 import ButtonAction from "./ButtonAction/ButtonAction";
 import cartImage from "../assets/images/cart.svg";
-import Counter from "./Button/Counter/Counter";
+import Counter from "./Counter/Counter";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../types/ProductTypes";
 import { useEffect, useState } from "react";

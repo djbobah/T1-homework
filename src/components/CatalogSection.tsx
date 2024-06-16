@@ -4,7 +4,7 @@ import styles from "./CatalogSection.module.scss";
 import Search from "./Search/Search";
 import Button from "./Button/Button";
 import { useGetProductsQuery } from "../services/dummyjsonApi";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { debounce } from "lodash";
 import Loader from "../utils/Loader";
 import Error from "./Error/Error";
@@ -24,12 +24,14 @@ const CatalogSection = () => {
   };
 
   function handleSearchClick() {
+    // console.log("asdsa");
     onSearch(searchQuery);
+    // debouncedSearch();
   }
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    debouncedSearch(e.target.value);
     setSearchQuery(e.target.value);
+    debouncedSearch(e.target.value);
   };
 
   function onSearch(query: string) {
@@ -37,7 +39,7 @@ const CatalogSection = () => {
   }
 
   // Создаем "debounced" версию функции с задержкой в 500 мс
-  const debouncedSearch = debounce(onSearch, 1000);
+  const debouncedSearch = useCallback(debounce(onSearch, 1000), []);
 
   if (isLoading) {
     return (
@@ -63,7 +65,14 @@ const CatalogSection = () => {
               onClick={handleSearchClick}
             />
             <section className={styles.cardList}>
-              {data?.map((good) => <Card {...good} key={good.id} />)}
+              {data?.length === 0 ? (
+                <p>
+                  Unfortunately, nothing was found based on the results of your
+                  query...
+                </p>
+              ) : (
+                data?.map((good) => <Card {...good} key={good.id} />)
+              )}
             </section>
             <div className={styles.moreButton}>
               <Button title="Show more" onClick={handleClickShow} />
