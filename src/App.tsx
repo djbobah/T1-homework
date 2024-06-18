@@ -11,6 +11,7 @@ import { initCart } from "./store/cartSlice";
 import { useEffect } from "react";
 import { useAppDispatch } from "./hooks";
 import Loader from "./utils/Loader";
+import Login from "./components/Login/Login";
 
 function App() {
   //получаем корзину пользователя с id 11
@@ -34,13 +35,14 @@ function App() {
   return (
     <>
       <Header />
-      <Routes>
+      <Login />
+      {/* <Routes>
         <Route path="/product/:id" element={<OneProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
-      <Footer />
+      <Footer /> */}
     </>
   );
 }

@@ -50,10 +50,22 @@ export const dummyjsonApi = createApi({
     getProduct: builder.query<IProduct, number>({
       query: (id: number) => `product/${id}`,
     }),
+
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "auth/login",
+        method: "POST",
+        body: credentials,
+      }),
+    }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserCartQuery, useGetProductsQuery, useGetProductQuery } =
-  dummyjsonApi;
+export const {
+  useGetUserCartQuery,
+  useGetProductsQuery,
+  useGetProductQuery,
+  useLoginMutation,
+} = dummyjsonApi;
