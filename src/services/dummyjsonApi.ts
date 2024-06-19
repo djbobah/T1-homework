@@ -58,6 +58,14 @@ export const dummyjsonApi = createApi({
         body: credentials,
       }),
     }),
+    auth: builder.query({
+      query: (credentials) => ({
+        url: "auth/me ",
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
+      }),
+    }),
   }),
 });
 
@@ -68,4 +76,5 @@ export const {
   useGetProductsQuery,
   useGetProductQuery,
   useLoginMutation,
+  useAuthQuery,
 } = dummyjsonApi;
