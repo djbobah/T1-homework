@@ -15,7 +15,16 @@ import Login from "./components/Login/Login";
 import ProtectedRoutes from "./components/protectedRoutes";
 
 function App() {
-  // const { data, isLoading, error } = useAuthQuery(localStorage.getItem("t1"));
+  const { data, isLoading, error } = useAuthQuery(localStorage.getItem("t1"));
+
+  // console.log("data", data.id);
+
+  // const {
+  //   data: cart,
+  //   error: errorCart,
+  //   isLoading: isLoadingCart,
+  // } = useGetUserCartQuery(data?.id);
+
   // console.log("dfgffdg", error);
   // const isAuth = true;
 
@@ -23,15 +32,19 @@ function App() {
   let navigate = useNavigate();
 
   useEffect(() => {
-    console.log("app");
+    if (error) localStorage.removeItem("t1");
+    console.log("app", error);
+
     const token = localStorage.getItem("t1");
+    console.log("app", token);
+    // console.log("app", error);
     // Здесь должна быть проверка срока действия токена
     const authStatus = !!token;
     setIsAuthenticated(authStatus);
     if (!authStatus) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, [navigate, error]);
 
   //получаем корзину пользователя с id 11
   // const { data, isLoading, error } = useAuthQuery(localStorage.getItem("t1"));
@@ -41,8 +54,8 @@ function App() {
   //   if (data) {
   //     dispatch(initCart(data));
   //   }
-  // }, [data]);
-  // if (isLoading)
+  // // }, [data]);
+  // if (isLoadingCart)
   //   return (
   //     <>
   //       <Loader />
@@ -50,11 +63,11 @@ function App() {
   //     </>
   //   );
 
-  // if (error) return <p>Something went wrong.</p>;
+  // if (errorCart) return <p>Something went wrong.</p>;
 
   return (
     <>
-      <Header />
+      <Header auth={isAuthenticated} />
 
       <Routes>
         <Route

@@ -57,6 +57,10 @@ export const dummyjsonApi = createApi({
         method: "POST",
         body: credentials,
       }),
+      onQueryStarted: async (arg, { queryFulfilled }) => {
+        const { data } = await queryFulfilled;
+        localStorage.setItem("t1", data.token);
+      },
     }),
     auth: builder.query({
       query: (credentials) => ({

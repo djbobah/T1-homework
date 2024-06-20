@@ -12,11 +12,11 @@ const Login = () => {
 
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("set token");
+    // console.log("set token");
 
     if (data?.token) {
       localStorage.setItem("t1", data.token);
-      console.log("login");
+      // console.log("login");
       navigate("/");
     }
   }, [data]);
