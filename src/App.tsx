@@ -46,15 +46,29 @@ function App() {
     }
   }, [navigate, error]);
 
-  //получаем корзину пользователя с id 11
-  // const { data, isLoading, error } = useAuthQuery(localStorage.getItem("t1"));
-  // const { data, error, isLoading } = useGetUserCartQuery(15);
-  // const dispatch = useAppDispatch();
-  // useEffect(() => {
-  //   if (data) {
-  //     dispatch(initCart(data));
-  //   }
-  // // }, [data]);
+  // получаем корзину пользователя с id 11
+  const {
+    data: dataUser,
+    isLoading: isLoadingUser,
+    error: errorUser,
+  } = useAuthQuery(localStorage.getItem("t1"));
+
+  if (errorUser) {
+    localStorage.removeItem("t1");
+  }
+
+  console.log("dataUser", dataUser);
+  const {
+    data: dataCart,
+    error: errorCart,
+    isLoading: isLoadingCart,
+  } = useGetUserCartQuery(dataUser?.id);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (data) {
+      dispatch(initCart(dataCart));
+    }
+  }, [data]);
   // if (isLoadingCart)
   //   return (
   //     <>
@@ -63,7 +77,8 @@ function App() {
   //     </>
   //   );
 
-  // if (errorCart) return <p>Something went wrong.</p>;
+  if (errorUser) console.log(errorUser);
+  //return <p>Something went wrong.</p>;
 
   return (
     <>
