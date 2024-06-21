@@ -1,10 +1,11 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IProduct, IUserCart } from "../types/ProductTypes";
 
-interface IProductQuery {
+interface IProductsQuery {
   query: string;
   limit: number;
   skip: number;
+  credentials: string;
 }
 
 // Define a service using a base URL and expected endpoints
@@ -19,11 +20,14 @@ export const dummyjsonApi = createApi({
       transformResponse: (response: { carts: IUserCart[] }) =>
         response.carts[0],
     }),
-    getProducts: builder.query<IProduct[], IProductQuery>({
+    getProducts: builder.query<IProduct[], IProductsQuery>({
       // query: ({ query, limit, skip }) =>
       //   `products/search?q=${query}&limit=${limit}&skip=${skip}`,
-      query: ({ query, limit, skip }) => ({
+      query: ({ query, limit, skip, credentials }) => ({
         url: `products/search?q=${query}&limit=${limit}&skip=${skip}`,
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
       }),
       transformResponse: (response: { products: IProduct[] }) =>
         response.products,
@@ -47,8 +51,13 @@ export const dummyjsonApi = createApi({
       },
       keepUnusedDataFor: 60,
     }),
-    getProduct: builder.query<IProduct, number>({
-      query: (id: number) => `product/${id}`,
+    getProduct: builder.query<IProduct, { id: number; credentials: string }>({
+      query: ({ id, credentials }) => ({
+        url: `product/${id}`,
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
+      }),
     }),
 
     login: builder.mutation({

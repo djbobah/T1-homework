@@ -4,20 +4,33 @@ import styles from "./CatalogSection.module.scss";
 import Search from "./Search/Search";
 import Button from "./Button/Button";
 import { useGetProductsQuery } from "../services/dummyjsonApi";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { debounce } from "lodash";
 import Loader from "../utils/Loader";
 import Error from "./Error/Error";
+import { isTokenExpired } from "../utils/functions";
+import { useNavigate } from "react-router-dom";
 
 const CatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (isTokenExpired(localStorage.getItem("t1")!)) {
+      localStorage.removeItem("t1");
+      navigate("/login");
+      console.log("remove");
+    }
+  }, [navigate]);
   const [queryST, setQuery] = useState({
     query: "",
     limit: 9,
     skip: 0,
+    credentials: localStorage.getItem("t1") || "",
   });
 
   const { data, error, isLoading } = useGetProductsQuery(queryST);
+
+  console.log("error prodicts", error);
 
   const handleClickShow = () => {
     setQuery((prev) => ({ ...prev, skip: prev.skip + 9 }));

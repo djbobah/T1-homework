@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
-import { useAuthQuery, useLoginMutation } from "../../services/dummyjsonApi";
+import { useLoginMutation } from "../../services/dummyjsonApi";
 import Button from "../Button/Button";
 import styles from "./Login.module.scss";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import Loader from "../../utils/Loader";
 // im
 
 const Login = () => {
@@ -11,6 +12,7 @@ const Login = () => {
   const [login, { isLoading, data, error }] = useLoginMutation();
 
   const navigate = useNavigate();
+
   useEffect(() => {
     // console.log("set token");
 
@@ -20,6 +22,15 @@ const Login = () => {
       navigate("/");
     }
   }, [data]);
+
+  if (isLoading) {
+    return (
+      <>
+        <Loader />
+        <p className="container">LOADING...</p>
+      </>
+    );
+  }
 
   const handleClickLogin = () => {
     login({
@@ -69,7 +80,7 @@ const Login = () => {
           className={styles.input}
           onChange={handleChange}
         />
-        {error ? <p className={styles.error}>{error.data.message}</p> : ""}
+        {error ? <p className={styles.error}>Something went wrong.</p> : ""}
         <Button title="Login" onClick={handleClickLogin} />
       </div>
     </section>

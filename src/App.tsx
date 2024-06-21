@@ -15,70 +15,58 @@ import Login from "./components/Login/Login";
 import ProtectedRoutes from "./components/protectedRoutes";
 
 function App() {
-  const { data, isLoading, error } = useAuthQuery(localStorage.getItem("t1"));
-
-  // console.log("data", data.id);
-
-  // const {
-  //   data: cart,
-  //   error: errorCart,
-  //   isLoading: isLoadingCart,
-  // } = useGetUserCartQuery(data?.id);
-
-  // console.log("dfgffdg", error);
-  // const isAuth = true;
-
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  let navigate = useNavigate();
 
-  useEffect(() => {
-    if (error) localStorage.removeItem("t1");
-    console.log("app", error);
-
-    const token = localStorage.getItem("t1");
-    console.log("app", token);
-    // console.log("app", error);
-    // Здесь должна быть проверка срока действия токена
-    const authStatus = !!token;
-    setIsAuthenticated(authStatus);
-    if (!authStatus) {
-      navigate("/login");
-    }
-  }, [navigate, error]);
-
-  // получаем корзину пользователя с id 11
+  // Authentication logic
   const {
-    data: dataUser,
+    data: userData,
     isLoading: isLoadingUser,
     error: errorUser,
   } = useAuthQuery(localStorage.getItem("t1"));
+  useEffect(() => {
+    if (errorUser) {
+      // console.log("!!!!!!!!!!!11 user error");
+      localStorage.removeItem("t1");
+      setIsAuthenticated(false);
+      navigate("/login");
+    } else if (userData) {
+      setIsAuthenticated(true);
+    }
+  }, [userData, errorUser, navigate]);
 
-  if (errorUser) {
-    localStorage.removeItem("t1");
-  }
-
-  console.log("dataUser", dataUser);
+  // Cart logic
   const {
     data: dataCart,
     error: errorCart,
     isLoading: isLoadingCart,
-  } = useGetUserCartQuery(dataUser?.id);
-  const dispatch = useAppDispatch();
+  } = useGetUserCartQuery(userData?.id);
   useEffect(() => {
-    if (data) {
+    if (dataCart && !errorCart) {
       dispatch(initCart(dataCart));
     }
-  }, [data]);
-  // if (isLoadingCart)
-  //   return (
-  //     <>
-  //       <Loader />
-  //       <p className="container">LOADING...</p>
-  //     </>
-  //   );
+  }, [dataCart, errorCart, dispatch]);
 
-  if (errorUser) console.log(errorUser);
-  //return <p>Something went wrong.</p>;
+  // Loading states
+  if (isLoadingUser || isLoadingCart) {
+    return (
+      <>
+        <Loader />
+        <p className="container">LOADING...</p>
+      </>
+    );
+  }
+
+  // // Error handling
+  // if (errorUser || errorCart) {
+  //   // localStorage.removeItem("t1");
+  //   // setIsAuthenticated(false);
+  //   // navigate("/login");
+  //   console.log(errorUser || errorCart);
+
+  //   return <p className="container">Something went wrong.</p>;
+  // }
 
   return (
     <>
@@ -89,7 +77,7 @@ function App() {
           path="/login"
           element={isAuthenticated ? <Navigate to="/" /> : <Login />}
         />
-        <Route element={<ProtectedRoutes />}>
+        <Route element={<ProtectedRoutes isAuthenticated={isAuthenticated} />}>
           <Route path="/product/:id" element={<OneProduct />} />
           <Route path="/login" element={<Navigate to="/" />} />
           <Route path="/cart" element={<Cart />} />

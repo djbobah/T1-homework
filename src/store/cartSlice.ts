@@ -31,6 +31,7 @@ const CartSlice = createSlice({
   initialState,
   reducers: {
     initCart(state, action: PayloadAction<IUserCart>) {
+      console.log("init cart", action.payload);
       state.cart = action.payload;
     },
     // setIsModalBKOpen(state, action) {
