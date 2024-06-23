@@ -23,4 +23,8 @@
     width: 31px;
     height: 65px;
   }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: lightgray;
+  }
 }

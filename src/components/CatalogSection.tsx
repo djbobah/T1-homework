@@ -87,7 +87,7 @@ const CatalogSection = () => {
                   query...
                 </p>
               ) : (
-                data?.map((good) => <Card {...good} key={good.id} />)
+                data?.map((product) => <Card good={product} key={product.id} />)
               )}
             </section>
             <div className={styles.moreButton}>

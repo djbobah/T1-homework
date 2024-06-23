@@ -1,11 +1,11 @@
 import styles from "./CartItem.module.scss";
 import Counter from "./Counter/Counter";
 import { useNavigate } from "react-router-dom";
-import { ICartProduct } from "../types/ProductTypes";
+import { IProduct } from "../types/ProductTypes";
 // import Loader from "../utils/Loader";
 
 interface ICartItem {
-  product: ICartProduct;
+  product: IProduct;
 }
 
 const CartItem: React.FC<ICartItem> = ({ product }) => {
@@ -27,7 +27,7 @@ const CartItem: React.FC<ICartItem> = ({ product }) => {
           {product.title} <p>{product.price} $</p>
         </div>
       </div>
-      <Counter count={product.quantity} />
+      <Counter data={product} />
       <button>Delete</button>
     </section>
   );

@@ -21,10 +21,6 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
   const cart = useAppSelector((store) => store.cart.cart);
 
   // console.log("changeSide", changeSide);
-  useEffect(() => {
-    const presentInCart = cart.products.find((item) => item.id === data.id);
-    if (presentInCart) setCounter(presentInCart.quantity);
-  }, []);
 
   // приводим продукты из зорзины к виду для отправки на api
   const products = cart.products.map((item) => {
@@ -33,6 +29,12 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
       quantity: item.quantity,
     };
   });
+
+  useEffect(() => {
+    const presentInCart = cart.products.find((item) => item.id === data.id);
+    if (presentInCart) setCounter(presentInCart.quantity);
+    else setCounter(0);
+  }, [cart]);
 
   console.log("products", products);
   const [updateCart, { isLoading, error }] = useAddToCartMutation();
@@ -56,36 +58,6 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
     } catch (err) {
       console.error("Failed to update cart", err);
     }
-  };
-
-  const handleCounterChange = async (side: string) => {
-    if (side === "+") {
-      setCounter((prev) => prev + 1);
-      products.map((item) => {
-        if (item.id === data.id) {
-          item.quantity = counter + 1;
-        }
-      });
-      try {
-        const response = await updateCart({
-          idCart: cart.id,
-          credentials: localStorage.getItem("t1"),
-
-          product: products,
-        });
-
-        console.log("Product added to cart", response);
-        dispatch(initCart(response.data));
-      } catch (err) {
-        console.error("Failed to update cart", err);
-      }
-      // console.log(products);
-    }
-
-    if (side === "-") {
-      setCounter((prev) => prev - 1);
-    }
-    console.log(side, counter);
   };
 
   // useEffect(()=>{
@@ -163,9 +135,10 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
             />
           ) : (
             <Counter
-              count={counter}
+              data={data}
+              // count={counter}
               big={true}
-              setChangeSide={handleCounterChange}
+              // setChangeSide={handleCounterChange}
             />
           )}
         </section>

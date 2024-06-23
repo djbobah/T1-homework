@@ -7,21 +7,17 @@ import { IProduct } from "../types/ProductTypes";
 import { useEffect, useState } from "react";
 import { useAppSelector } from "../hooks";
 
-// interface IGood {
-//   id: number;
-//   image: string;
-//   count: number;
-//   title: string;
-//   price: number;
-// }
+interface IGood {
+  good: IProduct;
+}
 
-const Card = ({ id, thumbnail, title, price }: IProduct) => {
+const Card = ({ good }: IGood) => {
   const [count, setCount] = useState(0);
 
   const cartProducts = useAppSelector((state) => state.cart.cart.products);
   useEffect(() => {
     cartProducts.map((product): void => {
-      if (product.id === id) setCount(product.quantity);
+      if (product.id === good.id) setCount(product.quantity);
     });
   }, [cartProducts]);
 
@@ -40,18 +36,18 @@ const Card = ({ id, thumbnail, title, price }: IProduct) => {
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
         <img
-          src={thumbnail}
-          alt={title + " image"}
-          onClick={() => handleClickCard(id)}
+          src={good.thumbnail}
+          alt={good.title + " image"}
+          onClick={() => handleClickCard(good.id)}
         />
       </div>
       <div className={styles.description}>
-        <div className={styles.text} onClick={() => handleClickCard(id)}>
-          <p className={styles.title}>{CorpTitle(title, count)}</p>
-          <p className={styles.price}>{price + " $"}</p>
+        <div className={styles.text} onClick={() => handleClickCard(good.id)}>
+          <p className={styles.title}>{CorpTitle(good.title, count)}</p>
+          <p className={styles.price}>{good.price + " $"}</p>
         </div>
         {count > 0 ? (
-          <Counter count={count} />
+          <Counter data={good} />
         ) : (
           <ButtonAction img={cartImage} type="add to cart" />
         )}

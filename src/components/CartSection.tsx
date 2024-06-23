@@ -18,7 +18,7 @@ const CartSection = () => {
             <span>Total count:</span> <span>{cart.totalProducts}</span>
           </p>
           <p className={styles.price}>
-            <span>Total price:</span> <span> {cart.total}$ </span>
+            <span>Total price:</span> <span> {cart.total.toFixed(2)}$ </span>
           </p>
           <p className={styles.total}>
             <span>Total price with discount:</span>
