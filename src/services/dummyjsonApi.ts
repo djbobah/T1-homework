@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IProduct, IUserCart } from "../types/ProductTypes";
+import { merge } from "lodash";
 
 interface IProductsQuery {
   query: string;
@@ -79,6 +80,21 @@ export const dummyjsonApi = createApi({
         },
       }),
     }),
+
+    addToCart: builder.mutation({
+      query: ({ idCart, product, credentials }) => ({
+        url: `carts/${idCart}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${credentials}`,
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          merge: true,
+          products: product,
+        }),
+      }),
+    }),
   }),
 });
 
@@ -90,4 +106,5 @@ export const {
   useGetProductQuery,
   useLoginMutation,
   useAuthQuery,
+  useAddToCartMutation,
 } = dummyjsonApi;

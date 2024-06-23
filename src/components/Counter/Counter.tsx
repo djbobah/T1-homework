@@ -7,30 +7,49 @@ import ButtonAction from "../ButtonAction/ButtonAction";
 interface ICounter {
   count: number;
   stylesName?: string;
+  big?: boolean;
+  // onChange: (event: React.MouseEvent<HTMLButtonElement>) => string;
+  setChangeSide: (str: string) => void;
 }
 
-const Counter = ({ count, stylesName }: ICounter) => {
-  const [counter, setCounter] = useState(count);
+const Counter = ({
+  count,
+  stylesName,
+  big = false,
+  setChangeSide,
+}: ICounter) => {
+  // const [counter, setCounter] = useState(count);
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setCounter(() => Number(target.value));
+    console.log("в задании было сказано не менять вручную");
   };
 
-  const handleClickMinus = () => {
-    if (counter > 1) setCounter((prev) => prev - 1);
-    else setCounter(1);
-  };
+  // const handleClickMinus = () => {
+  //   if (counter > 0) setCounter((prev) => prev - 1);
+  //   else setCounter(0);
+  // };
   return (
     <div className={styles.counterWrapper + " " + stylesName}>
       <ButtonAction
         img={minusImg}
-        onClick={handleClickMinus}
+        // onClick={handleClickMinus}
+        onClick={() => setChangeSide("-")}
         type="decrement counter"
+        big={big}
       />
-      <input type="text" value={counter} onChange={handleChange} />
+      <input
+        type="text"
+        value={count}
+        onChange={handleChange}
+        className={
+          big === true ? styles.count + " " + styles.big : styles.count
+        }
+      />
       <ButtonAction
         img={plusImg}
-        onClick={() => setCounter((prev) => prev + 1)}
+        // onClick={() => setCounter((prev) => prev + 1)}
+        onClick={() => setChangeSide("+")}
         type="increment counter"
+        big={big}
       />
     </div>
   );

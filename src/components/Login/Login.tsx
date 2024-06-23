@@ -36,7 +36,7 @@ const Login = () => {
     login({
       username: user.login,
       password: user.password,
-      expiresInMins: 1,
+      expiresInMins: 30,
     });
     // navigate("/");
     // return <Navigate to="/" />;

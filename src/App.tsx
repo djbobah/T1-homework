@@ -5,7 +5,7 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import OneProduct from "./pages/OneProduct";
 import NotFound from "./pages/NotFound";
-import Footer from "./components/Footer";
+// import Footer from "./components/Footer";
 import { useAuthQuery, useGetUserCartQuery } from "./services/dummyjsonApi";
 import { initCart } from "./store/cartSlice";
 import { useEffect, useState } from "react";
@@ -13,6 +13,7 @@ import { useAppDispatch } from "./hooks";
 import Loader from "./utils/Loader";
 import Login from "./components/Login/Login";
 import ProtectedRoutes from "./components/protectedRoutes";
+import { isTokenExpired } from "./utils/functions";
 
 function App() {
   const navigate = useNavigate();
@@ -33,6 +34,12 @@ function App() {
       navigate("/login");
     } else if (userData) {
       setIsAuthenticated(true);
+    }
+
+    if (isTokenExpired(localStorage.getItem("t1")!)) {
+      console.log("TokenExpired");
+      localStorage.removeItem("t1");
+      // navigate("/login");
     }
   }, [userData, errorUser, navigate]);
 

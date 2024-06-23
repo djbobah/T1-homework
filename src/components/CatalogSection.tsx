@@ -13,14 +13,17 @@ import { useNavigate } from "react-router-dom";
 
 const CatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (isTokenExpired(localStorage.getItem("t1")!)) {
-      localStorage.removeItem("t1");
-      navigate("/login");
-      console.log("remove");
-    }
-  }, [navigate]);
+  // const [redirected, setRedirected] = useState(false);
+  // const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!redirected && isTokenExpired(localStorage.getItem("t1")!)) {
+  //     localStorage.removeItem("t1");
+  //     setRedirected(true); // Устанавливаем состояние перенаправления
+  //     navigate("/login");
+  //   }
+  // }, [navigate, redirected]); // Добавляем `redirected` в список зависимостей
+
   const [queryST, setQuery] = useState({
     query: "",
     limit: 9,
