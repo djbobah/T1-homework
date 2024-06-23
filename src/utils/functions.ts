@@ -29,7 +29,7 @@ export const isTokenExpired = (token: string) => {
 
     return expirationDate < currentDate;
   } catch (e) {
-    console.error("Error checking token expiration: ", e);
+    console.error(e);
     return true;
   }
 };
