@@ -45,7 +45,7 @@ export interface IUserCart {
   userId: number;
 }
 
-export interface ICartProduct {
+export interface ICartProduct extends IProduct {
   id: number;
   title: string;
   price: number;

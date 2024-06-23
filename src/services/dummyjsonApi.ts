@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IProduct, IUserCart } from "../types/ProductTypes";
-import { merge } from "lodash";
+// import { merge } from "lodash";
 
 interface IProductsQuery {
   query: string;

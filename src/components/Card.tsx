@@ -5,19 +5,21 @@ import Counter from "./Counter/Counter";
 import { useNavigate } from "react-router-dom";
 import { IProduct } from "../types/ProductTypes";
 import { useEffect, useState } from "react";
-import { useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAddToCartMutation } from "../services/dummyjsonApi";
+import { initCart } from "../store/cartSlice";
 
 interface IGood {
   good: IProduct;
 }
 
 const Card = ({ good }: IGood) => {
-  const [count, setCount] = useState(0);
+  const [counter, setCounter] = useState(0);
 
   const cartProducts = useAppSelector((state) => state.cart.cart.products);
   useEffect(() => {
     cartProducts.map((product): void => {
-      if (product.id === good.id) setCount(product.quantity);
+      if (product.id === good.id) setCounter(product.quantity);
     });
   }, [cartProducts]);
 
@@ -32,6 +34,45 @@ const Card = ({ good }: IGood) => {
     navigate("/product/" + id);
   };
 
+  const dispatch = useAppDispatch();
+
+  const cart = useAppSelector((store) => store.cart.cart);
+
+  // приводим продукты из зорзины к виду для отправки на api
+  const products = cart.products.map((item) => {
+    return {
+      id: item.id,
+      quantity: item.quantity,
+    };
+  });
+
+  useEffect(() => {
+    const presentInCart = cart.products.find((item) => item.id === good.id);
+    if (presentInCart) setCounter(presentInCart.quantity);
+    else setCounter(0);
+  }, [cart]);
+
+  const [updateCart] = useAddToCartMutation(); //, { isLoading, error }
+  const handleClickAddToCart = async () => {
+    setCounter(1);
+    products.push({
+      id: good.id,
+      quantity: 1,
+    });
+    try {
+      const response = await updateCart({
+        idCart: cart.id,
+        credentials: localStorage.getItem("t1"),
+
+        product: products,
+      });
+
+      dispatch(initCart(response.data));
+    } catch (err) {
+      console.error("Failed to update cart", err);
+    }
+  };
+
   return (
     <article className={styles.card}>
       <div className={styles.imageWrapper}>
@@ -43,13 +84,17 @@ const Card = ({ good }: IGood) => {
       </div>
       <div className={styles.description}>
         <div className={styles.text} onClick={() => handleClickCard(good.id)}>
-          <p className={styles.title}>{CorpTitle(good.title, count)}</p>
+          <p className={styles.title}>{CorpTitle(good.title, counter)}</p>
           <p className={styles.price}>{good.price + " $"}</p>
         </div>
-        {count > 0 ? (
+        {counter > 0 ? (
           <Counter data={good} />
         ) : (
-          <ButtonAction img={cartImage} type="add to cart" />
+          <ButtonAction
+            img={cartImage}
+            type="add to cart"
+            onClick={handleClickAddToCart}
+          />
         )}
       </div>
     </article>

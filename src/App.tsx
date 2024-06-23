@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import OneProduct from "./pages/OneProduct";
 import NotFound from "./pages/NotFound";
-// import Footer from "./components/Footer";
 import { useAuthQuery, useGetUserCartQuery } from "./services/dummyjsonApi";
 import { initCart } from "./store/cartSlice";
 import { useEffect, useState } from "react";
@@ -20,7 +19,6 @@ function App() {
   const dispatch = useAppDispatch();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Authentication logic
   const {
     data: userData,
     isLoading: isLoadingUser,
@@ -28,7 +26,6 @@ function App() {
   } = useAuthQuery(localStorage.getItem("t1"));
   useEffect(() => {
     if (errorUser) {
-      // console.log("!!!!!!!!!!!11 user error");
       localStorage.removeItem("t1");
       setIsAuthenticated(false);
       navigate("/login");
@@ -39,11 +36,9 @@ function App() {
     if (isTokenExpired(localStorage.getItem("t1")!)) {
       console.log("TokenExpired");
       localStorage.removeItem("t1");
-      // navigate("/login");
     }
   }, [userData, errorUser, navigate]);
 
-  // Cart logic
   const {
     data: dataCart,
     error: errorCart,
@@ -55,7 +50,6 @@ function App() {
     }
   }, [dataCart, errorCart, dispatch]);
 
-  // Loading states
   if (isLoadingUser || isLoadingCart) {
     return (
       <>

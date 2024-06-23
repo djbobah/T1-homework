@@ -4,7 +4,6 @@ import Button from "../Button/Button";
 import styles from "./Login.module.scss";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../utils/Loader";
-// im
 
 const Login = () => {
   const [user, setUser] = useState({ login: "", password: "" });
@@ -14,11 +13,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // console.log("set token");
-
     if (data?.token) {
       localStorage.setItem("t1", data.token);
-      // console.log("login");
       navigate("/");
     }
   }, [data]);
@@ -38,25 +34,7 @@ const Login = () => {
       password: user.password,
       expiresInMins: 30,
     });
-    // navigate("/");
-    // return <Navigate to="/" />;
   };
-
-  // const handleClickLogin = () => {
-  //   const { isLoading, data, error } = useLoginQuery({
-  //     username: user.login,
-  //     password: user.password,
-  //     expiresInMins: 30,
-  //   });
-
-  //   // login({ username: user.login, password: user.password, expiresInMins: 30 });
-  //   console.log(data);
-  //   localStorage.setItem("t1", data.token);
-
-  //   // const { data: authUser, isLoading, error } = useAuthQuery(data.token);
-
-  //   // console.log("authUser", authUser);
-  // };
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     setUser((prev) => ({ ...prev, [target.name]: target.value }));

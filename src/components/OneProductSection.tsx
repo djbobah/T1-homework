@@ -14,13 +14,10 @@ interface IOneProductSection {
 }
 const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
   const [currentMainImage, setCurrentMainImage] = useState(data.images[0]);
-  // const [changeSide, setChangeSide] = useState("");
   const [counter, setCounter] = useState(0);
   const dispatch = useAppDispatch();
 
   const cart = useAppSelector((store) => store.cart.cart);
-
-  // console.log("changeSide", changeSide);
 
   // приводим продукты из зорзины к виду для отправки на api
   const products = cart.products.map((item) => {
@@ -36,8 +33,8 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
     else setCounter(0);
   }, [cart]);
 
-  console.log("products", products);
-  const [updateCart, { isLoading, error }] = useAddToCartMutation();
+  // console.log("products", products);
+  const [updateCart] = useAddToCartMutation(); //, { isLoading, error }
 
   const handleClickAddToCart = async () => {
     setCounter(1);
@@ -53,16 +50,11 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
         product: products,
       });
 
-      console.log("Product added to cart", response);
       dispatch(initCart(response.data));
     } catch (err) {
       console.error("Failed to update cart", err);
     }
   };
-
-  // useEffect(()=>{
-
-  // },[])
 
   const arrRating = makeArrFromRange(1, Math.round(data.rating));
 
@@ -134,12 +126,7 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
               onClick={handleClickAddToCart}
             />
           ) : (
-            <Counter
-              data={data}
-              // count={counter}
-              big={true}
-              // setChangeSide={handleCounterChange}
-            />
+            <Counter data={data} big={true} />
           )}
         </section>
         <section className={styles.subInfo}>

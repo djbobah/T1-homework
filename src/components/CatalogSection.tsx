@@ -4,25 +4,13 @@ import styles from "./CatalogSection.module.scss";
 import Search from "./Search/Search";
 import Button from "./Button/Button";
 import { useGetProductsQuery } from "../services/dummyjsonApi";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { debounce } from "lodash";
 import Loader from "../utils/Loader";
 import Error from "./Error/Error";
-import { isTokenExpired } from "../utils/functions";
-import { useNavigate } from "react-router-dom";
 
 const CatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
-  // const [redirected, setRedirected] = useState(false);
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!redirected && isTokenExpired(localStorage.getItem("t1")!)) {
-  //     localStorage.removeItem("t1");
-  //     setRedirected(true); // Устанавливаем состояние перенаправления
-  //     navigate("/login");
-  //   }
-  // }, [navigate, redirected]); // Добавляем `redirected` в список зависимостей
 
   const [queryST, setQuery] = useState({
     query: "",
@@ -33,16 +21,12 @@ const CatalogSection = () => {
 
   const { data, error, isLoading } = useGetProductsQuery(queryST);
 
-  console.log("error prodicts", error);
-
   const handleClickShow = () => {
     setQuery((prev) => ({ ...prev, skip: prev.skip + 9 }));
   };
 
   function handleSearchClick() {
-    // console.log("asdsa");
     onSearch(searchQuery);
-    // debouncedSearch();
   }
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -65,6 +49,7 @@ const CatalogSection = () => {
       </>
     );
   }
+
   if (error) {
     return <Error />;
   }
@@ -90,9 +75,11 @@ const CatalogSection = () => {
                 data?.map((product) => <Card good={product} key={product.id} />)
               )}
             </section>
-            <div className={styles.moreButton}>
-              <Button title="Show more" onClick={handleClickShow} />
-            </div>
+            {data.length !== 0 && (
+              <div className={styles.moreButton}>
+                <Button title="Show more" onClick={handleClickShow} />
+              </div>
+            )}
           </>
         )}
       </section>
