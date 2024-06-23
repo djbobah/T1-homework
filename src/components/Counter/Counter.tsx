@@ -94,7 +94,7 @@ const Counter = ({ data, stylesName, big = false }: ICounter) => {
     } catch (err) {
       console.error("Failed to update cart", err);
     }
-  }, 500);
+  }, 300);
 
   return (
     <div className={styles.counterWrapper + " " + stylesName}>
