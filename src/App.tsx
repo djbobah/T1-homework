@@ -1,46 +1,93 @@
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import OneProduct from "./pages/OneProduct";
 import NotFound from "./pages/NotFound";
-import Footer from "./components/Footer";
-import { useGetUserCartQuery } from "./services/dummyjsonApi";
+import { useAuthQuery, useGetUserCartQuery } from "./services/dummyjsonApi";
 import { initCart } from "./store/cartSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "./hooks";
 import Loader from "./utils/Loader";
+import Login from "./components/Login/Login";
+import ProtectedRoutes from "./components/protectedRoutes";
+import { isTokenExpired } from "./utils/functions";
 
 function App() {
-  //получаем корзину пользователя с id 11
-  const { data, error, isLoading } = useGetUserCartQuery(15);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  const {
+    data: userData,
+    isLoading: isLoadingUser,
+    error: errorUser,
+  } = useAuthQuery(localStorage.getItem("t1"));
   useEffect(() => {
-    if (data) {
-      dispatch(initCart(data));
+    if (errorUser) {
+      localStorage.removeItem("t1");
+      setIsAuthenticated(false);
+      navigate("/login");
+    } else if (userData) {
+      setIsAuthenticated(true);
     }
-  }, [data]);
-  if (isLoading)
+
+    if (isTokenExpired(localStorage.getItem("t1")!)) {
+      console.log("TokenExpired");
+      localStorage.removeItem("t1");
+    }
+  }, [userData, errorUser, navigate]);
+
+  const {
+    data: dataCart,
+    error: errorCart,
+    isLoading: isLoadingCart,
+  } = useGetUserCartQuery(userData?.id);
+  useEffect(() => {
+    if (dataCart && !errorCart) {
+      dispatch(initCart(dataCart));
+    }
+  }, [dataCart, errorCart, dispatch]);
+
+  if (isLoadingUser || isLoadingCart) {
     return (
       <>
         <Loader />
         <p className="container">LOADING...</p>
       </>
     );
+  }
 
-  if (error) return <p>Something went wrong.</p>;
+  // // Error handling
+  // if (errorUser || errorCart) {
+  //   // localStorage.removeItem("t1");
+  //   // setIsAuthenticated(false);
+  //   // navigate("/login");
+  //   console.log(errorUser || errorCart);
+
+  //   return <p className="container">Something went wrong.</p>;
+  // }
 
   return (
     <>
-      <Header />
+      <Header auth={isAuthenticated} />
+
       <Routes>
-        <Route path="/product/:id" element={<OneProduct />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<NotFound />} />
+        <Route
+          path="/login"
+          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
+        />
+        <Route element={<ProtectedRoutes isAuthenticated={isAuthenticated} />}>
+          <Route path="/product/:id" element={<OneProduct />} />
+          <Route path="/login" element={<Navigate to="/" />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
+        {/* <Route path="*" element={<Login />} /> */}
       </Routes>
-      <Footer />
     </>
   );
 }

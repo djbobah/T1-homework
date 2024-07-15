@@ -11,10 +11,12 @@ import Error from "./Error/Error";
 
 const CatalogSection = () => {
   const [searchQuery, setSearchQuery] = useState("");
+
   const [queryST, setQuery] = useState({
     query: "",
     limit: 9,
     skip: 0,
+    credentials: localStorage.getItem("t1") || "",
   });
 
   const { data, error, isLoading } = useGetProductsQuery(queryST);
@@ -24,9 +26,7 @@ const CatalogSection = () => {
   };
 
   function handleSearchClick() {
-    // console.log("asdsa");
     onSearch(searchQuery);
-    // debouncedSearch();
   }
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,6 +49,7 @@ const CatalogSection = () => {
       </>
     );
   }
+
   if (error) {
     return <Error />;
   }
@@ -71,12 +72,14 @@ const CatalogSection = () => {
                   query...
                 </p>
               ) : (
-                data?.map((good) => <Card {...good} key={good.id} />)
+                data?.map((product) => <Card good={product} key={product.id} />)
               )}
             </section>
-            <div className={styles.moreButton}>
-              <Button title="Show more" onClick={handleClickShow} />
-            </div>
+            {data.length !== 0 && (
+              <div className={styles.moreButton}>
+                <Button title="Show more" onClick={handleClickShow} />
+              </div>
+            )}
           </>
         )}
       </section>

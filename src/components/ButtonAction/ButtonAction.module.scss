@@ -16,3 +16,15 @@
     background-color: #8c2828;
   }
 }
+.big {
+  width: 67px;
+  height: 67px;
+  & img {
+    width: 31px;
+    height: 65px;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: lightgray;
+  }
+}

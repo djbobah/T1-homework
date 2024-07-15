@@ -3,15 +3,61 @@ import styles from "./OneProductSection.module.scss";
 import Button from "./Button/Button";
 import starImg from "../assets/images/Star 1.svg";
 import { IProduct } from "../types/ProductTypes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { makeArrFromRange } from "../utils/functions";
+import Counter from "./Counter/Counter";
+import { useAddToCartMutation } from "../services/dummyjsonApi";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { initCart } from "../store/cartSlice";
 interface IOneProductSection {
   data: IProduct;
 }
 const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
   const [currentMainImage, setCurrentMainImage] = useState(data.images[0]);
+  const [counter, setCounter] = useState(0);
+  const dispatch = useAppDispatch();
+
+  const cart = useAppSelector((store) => store.cart.cart);
+
+  // приводим продукты из зорзины к виду для отправки на api
+  const products = cart.products.map((item) => {
+    return {
+      id: item.id,
+      quantity: item.quantity,
+    };
+  });
+
+  useEffect(() => {
+    const presentInCart = cart.products.find((item) => item.id === data.id);
+    if (presentInCart) setCounter(presentInCart.quantity);
+    else setCounter(0);
+  }, [cart]);
+
+  // console.log("products", products);
+  const [updateCart] = useAddToCartMutation(); //, { isLoading, error }
+
+  const handleClickAddToCart = async () => {
+    setCounter(1);
+    products.push({
+      id: data.id,
+      quantity: 1,
+    });
+    try {
+      const response = await updateCart({
+        idCart: cart.id,
+        credentials: localStorage.getItem("t1"),
+
+        product: products,
+      });
+
+      dispatch(initCart(response.data));
+    } catch (err) {
+      console.error("Failed to update cart", err);
+    }
+  };
 
   const arrRating = makeArrFromRange(1, Math.round(data.rating));
+
   return (
     <section className={styles.container + " container"}>
       <h2 className={styles.title}>{`Product ${data.id}`}</h2>
@@ -73,7 +119,15 @@ const OneProductSection: React.FC<IOneProductSection> = ({ data }) => {
               <span> {data.description}</span>
             </li>
           </ul>
-          <Button title="Add to cart" styleName={styles.btn} />
+          {counter === 0 ? (
+            <Button
+              title="Add to cart"
+              styleName={styles.btn}
+              onClick={handleClickAddToCart}
+            />
+          ) : (
+            <Counter data={data} big={true} />
+          )}
         </section>
         <section className={styles.subInfo}>
           SKU ID<span> {data.sku}</span>

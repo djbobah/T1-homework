@@ -1,10 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { IProduct, IUserCart } from "../types/ProductTypes";
+// import { merge } from "lodash";
 
-interface IProductQuery {
+interface IProductsQuery {
   query: string;
   limit: number;
   skip: number;
+  credentials: string;
 }
 
 // Define a service using a base URL and expected endpoints
@@ -19,11 +21,14 @@ export const dummyjsonApi = createApi({
       transformResponse: (response: { carts: IUserCart[] }) =>
         response.carts[0],
     }),
-    getProducts: builder.query<IProduct[], IProductQuery>({
+    getProducts: builder.query<IProduct[], IProductsQuery>({
       // query: ({ query, limit, skip }) =>
       //   `products/search?q=${query}&limit=${limit}&skip=${skip}`,
-      query: ({ query, limit, skip }) => ({
+      query: ({ query, limit, skip, credentials }) => ({
         url: `products/search?q=${query}&limit=${limit}&skip=${skip}`,
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
       }),
       transformResponse: (response: { products: IProduct[] }) =>
         response.products,
@@ -47,13 +52,59 @@ export const dummyjsonApi = createApi({
       },
       keepUnusedDataFor: 60,
     }),
-    getProduct: builder.query<IProduct, number>({
-      query: (id: number) => `product/${id}`,
+    getProduct: builder.query<IProduct, { id: number; credentials: string }>({
+      query: ({ id, credentials }) => ({
+        url: `product/${id}`,
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
+      }),
+    }),
+
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "auth/login",
+        method: "POST",
+        body: credentials,
+      }),
+      onQueryStarted: async (arg, { queryFulfilled }) => {
+        const { data } = await queryFulfilled;
+        localStorage.setItem("t1", data.token);
+      },
+    }),
+    auth: builder.query({
+      query: (credentials) => ({
+        url: "auth/me ",
+        headers: {
+          Authorization: `Bearer ${credentials}`,
+        },
+      }),
+    }),
+
+    addToCart: builder.mutation({
+      query: ({ idCart, product, credentials }) => ({
+        url: `carts/${idCart}`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${credentials}`,
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          merge: true,
+          products: product,
+        }),
+      }),
     }),
   }),
 });
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetUserCartQuery, useGetProductsQuery, useGetProductQuery } =
-  dummyjsonApi;
+export const {
+  useGetUserCartQuery,
+  useGetProductsQuery,
+  useGetProductQuery,
+  useLoginMutation,
+  useAuthQuery,
+  useAddToCartMutation,
+} = dummyjsonApi;
