@@ -1,0 +1,16 @@
+.btn {
+  width: 48px;
+  height: 48px;
+  background-color: #f14f4f;
+  border: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  position: relative;
+  & img {
+    width: 18px;
+    height: 47px;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}

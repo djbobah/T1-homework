@@ -1,0 +1,36 @@
+.accordion {
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 29px;
+  cursor: pointer;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  will-change: transition;
+  transition: 0.4s;
+  &::after {
+    content: url("../assets/images/+.svg");
+    position: absolute;
+    right: 0px;
+    top: 29px;
+    will-change: transition;
+    transition: transform 0.4s;
+    transform: rotate(0deg);
+  }
+}
+
+.panel {
+  display: flex;
+  overflow: hidden;
+  max-height: 0;
+  will-change: transition;
+  transition: max-height 1s;
+}
+
+.open {
+  max-height: 50px;
+}
+.accordion.open:after {
+  transform: rotate(45deg) scale(1.4);
+}
