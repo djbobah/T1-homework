@@ -23,19 +23,20 @@ const Footer = () => {
           {" "}
           <Link to="/">Goods4you </Link>
         </span>
-
-        <ul>
-          <li>
-            <a onClick={() => goToAnchor("/", "#catalog")} href="#catalog">
-              Catalog
-            </a>
-          </li>
-          <li>
-            <a onClick={() => goToAnchor("/", "#faq")} href="#faq">
-              FAQ
-            </a>
-          </li>
-        </ul>
+        <nav>
+          <ul>
+            <li>
+              <a onClick={() => goToAnchor("/", "#catalog")} href="#catalog">
+                Catalog
+              </a>
+            </li>
+            <li>
+              <a onClick={() => goToAnchor("/", "#faq")} href="#faq">
+                FAQ
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </footer>
   );

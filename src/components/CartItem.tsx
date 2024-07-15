@@ -1,9 +1,14 @@
 import styles from "./CartItem.module.scss";
-import Counter from "./Counter";
-import sneakersImg from "../assets/images/sneakers.png";
+import Counter from "./Counter/Counter";
 import { useNavigate } from "react-router-dom";
+import { ICartProduct } from "../types/ProductTypes";
+// import Loader from "../utils/Loader";
 
-const CartItem = () => {
+interface ICartItem {
+  product: ICartProduct;
+}
+
+const CartItem: React.FC<ICartItem> = ({ product }) => {
   const navigate = useNavigate();
   const handleClickCard = (id: number) => {
     navigate("/product/" + id);
@@ -11,16 +16,18 @@ const CartItem = () => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.productInfo}>
-        <img
-          onClick={() => handleClickCard(1)}
-          src={sneakersImg}
-          alt="изображение товара"
-        />
-        <div onClick={() => handleClickCard(1)}>
-          Essence Mascara Lash Princess <p>110 $</p>
+        <div className={styles.imageWrapper}>
+          <img
+            onClick={() => handleClickCard(product.id)}
+            src={product.thumbnail}
+            alt={"image " + product.title}
+          />
+        </div>
+        <div onClick={() => handleClickCard(product.id)}>
+          {product.title} <p>{product.price} $</p>
         </div>
       </div>
-      <Counter count={1} />
+      <Counter count={product.quantity} />
       <button>Delete</button>
     </section>
   );

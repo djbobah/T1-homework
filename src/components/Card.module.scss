@@ -23,7 +23,21 @@
 .card {
   width: 370px;
   border-radius: 4px;
-  & img {
+}
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 2;
+  border-radius: 4px;
+  background-color: inherit;
+  will-change: transition;
+  transition: all 1s ease;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  & > img {
     -webkit-filter: brightness(100%);
   }
   &:hover {
@@ -32,6 +46,7 @@
       -webkit-filter: brightness(85%);
       will-change: transition;
       transition: all 2s ease;
+      z-index: 1;
     }
     & .title {
       text-decoration: underline;

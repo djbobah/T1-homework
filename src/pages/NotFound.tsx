@@ -4,8 +4,8 @@ const NotFound = () => {
   return (
     <section className="container notFound">
       <img src={image} alt="фоновая картинка для страницы" />
-      <h1>404 - Страница не найдена</h1>
-      <p>Извините, запрашиваемая вами страница не существует.</p>
+      <h1>404 - The page was not found</h1>
+      <p>Sorry, the page you requested does not exist.</p>
     </section>
   );
 };

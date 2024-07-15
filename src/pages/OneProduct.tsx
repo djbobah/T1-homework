@@ -1,24 +1,21 @@
 import { useNavigate, useParams } from "react-router-dom";
-import goods from "../mock/goods.json";
-import { useEffect } from "react";
+// import goods from "../mock/goods.json";
+
 import OneProductSection from "../components/OneProductSection";
+
+import { useGetProductQuery } from "../services/dummyjsonApi";
+// import { IProduct } from "../types/ProductTypes";
 
 const OneProduct = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const findProductById = (id: number) => {
-    return goods.find((item) => item.id === id);
-  };
 
-  const product = findProductById(Number(id));
+  const { data, isLoading, isError } = useGetProductQuery(Number(id));
+  if (isLoading) return <p className="container">Идет загрузка данных...</p>;
+  if (isError) navigate("/notfound");
 
-  useEffect(() => {
-    if (!product) {
-      navigate("/notfound");
-    }
-  }, [id]);
-
-  return <OneProductSection />;
+  return <OneProductSection data={data!} />;
+  // return <Error />;
 };
 
 export default OneProduct;

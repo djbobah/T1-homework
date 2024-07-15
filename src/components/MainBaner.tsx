@@ -1,6 +1,6 @@
 import styles from "./MainBaner.module.scss";
 
-import Button from "./Button";
+import Button from "./Button/Button";
 
 const MainBaner = () => {
   return (
